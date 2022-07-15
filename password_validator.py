@@ -21,11 +21,18 @@ def validate_password(passwd) -> str:
 
 
 def main():
-    if len(sys.argv) == 2:
+    if len(sys.argv) == 3:
+        if sys.argv[1] == "-f":
+            path = sys.argv[2]
+            with open(path, 'r') as f:
+                contents = f.readline()
+                validate_password(contents)
+    elif len(sys.argv) == 2:
         validate_password(sys.argv[1])
     else:
         print(colored("Wrong input, an example for valid input:\n"
-                      "python ./password_validator.py \"MyP@ssw0rd!\"\n", "red"))
+                      "python ./password_validator.py \"MyP@ssw0rd!\"\n"
+                      "python ./password_validator.py \"/myPATH/password.txt\"", "red"))
 
 
 if __name__ == '__main__':
